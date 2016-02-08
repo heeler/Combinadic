@@ -10,7 +10,7 @@ Dependencies
 
 If you wish to run the unit tests you will need to install the googletest libraries and link 
 against them in the compile. The makefile is currently setup to use a framework (OSX thing)
-but for linux change the **-F and -framework gtest** flags to **-L (path to lib folder) -lgtest**.
+but for linux change the **-F (path to frameworks folder) -framework gtest** flags to **-L (path to lib folder) -lgtest**.
 
 Useage in Code
 --------------
