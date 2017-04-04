@@ -1,6 +1,7 @@
 #xcode specific
 google/*
 build/*
+bin/*
 *.pbxuser
 *.mode2v3
 *.mode1v3
@@ -21,6 +22,8 @@ project.xcworkspace
 *.pb.h
 *.pb.cc
 *.o
+*.so
+*.dylib
 
 # Python
 # Byte-compiled / optimized 
