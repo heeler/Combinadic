@@ -13,6 +13,7 @@ Boost::Python wrappers to build combinadic.so (shared library) that is loadable
 as a python module. The Jamfile can be use as a template for building other C++ 
 projects to export to python. The command to build the module is:
 > b2
+It does require that [Boost](http://www.boost.org) be installed and if you wish to use another compiler will need minor modification. 
 
 
 Dependencies
