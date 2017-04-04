@@ -5,6 +5,16 @@ CSet is a C++ class for generating a combinadic and converting a combinadic to t
 integer indexes. Follow the [link](https://en.wikipedia.org/wiki/Combinatorial_number_system) 
 for an indepth discussion on Combinadics (Combinaatorial number systems).
 
+As A Python Module
+------------------
+
+The project currently has a Jamfile (Boost::Build) that will use clang++ and the 
+Boost::Python wrappers to build combinadic.so (shared library) that is loadable 
+as a python module. The Jamfile can be use as a template for building other C++ 
+projects to export to python. The command to build the module is:
+> b2
+
+
 Dependencies
 ------------
 
@@ -36,7 +46,7 @@ compiler tool to make sure a different version is not accidently being called.
 Once the Makefile has the appropriate values entered then simply type make in the 
 main project directory (where the Makefile lives).
 
-Contant
+Contact
 -------
 
 If you have any questions feel free to contact me. --Jamie
