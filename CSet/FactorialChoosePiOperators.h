@@ -18,17 +18,24 @@
 
 namespace ABSciex_HT {
     struct Math {
+        //typedef unsigned long uBigI;
         typedef unsigned long long int uBigI; //Big Int Type
         typedef long long int BigI;
-        typedef std::vector<uint_fast8_t> IDXVec;
+        typedef std::vector<uint_fast16_t> IDXVec;
         typedef std::unique_ptr<IDXVec> IDXVecPtr;
+        
+        static IDXVec pyIndexListFromCombinadic(uBigI cbx, uBigI N, uBigI K);
+        static uBigI pyCombinadicFromIndexList(IDXVec &vec);
+
         
         static uBigI choose(uBigI N, uBigI K);
         static uBigI factorial(uBigI N);
         
         static BigI SequenceProduct(BigI i, BigI M); // math: \Pi_i^m
         
+        
         static IDXVecPtr indexListFromCombinadic(uBigI cbx, uBigI N, uBigI K);
+        
         static uBigI combinadicFromIndexList(IDXVec *vecp);
         
         //abstract base class
@@ -45,7 +52,7 @@ namespace ABSciex_HT {
         {
             uBigI m_N;
         public:
-            FactorialException(uBigI N, const char* funcName): m_N(N), MathException(funcName) {}
+            FactorialException(uBigI N, const char* funcName): MathException(funcName), m_N(N) {}
             const char* what() const throw ();
         };
         
@@ -54,15 +61,18 @@ namespace ABSciex_HT {
             BigI m_i, m_M;
         public:
             SequenceOrderException(uBigI i, uBigI M, const char* func)
-                : m_i(i), m_M(M), MathException(func) {}
+                : MathException(func), m_i(i), m_M(M) {}
             const char* what(void) const throw ();
         };
         
     private:
         static BigI SequenceProduct(BigI i, BigI M, unsigned long int depth); // math: \Pi_i^m
-        static uBigI factorial(uBigI N, unsigned long depth);
+        static uBigI factorialp(uBigI N, unsigned long depth);
         static uBigI indexFromInteger(BigI &x, uBigI n, uBigI k);
     };
 }
+
+
+
 
 #endif /* defined(__CSet__FactorialChoosePiOperators__) */

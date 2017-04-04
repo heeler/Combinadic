@@ -9,18 +9,25 @@
 #include <cstdlib>
 #include <numeric>
 #include "FactorialChoosePiOperators.h"
+#ifdef __BUILD_PYTHON__
+#include <boost/python.hpp>
+#include <boost/python/class.hpp>
+#include <boost/python/module.hpp>
+#include <boost/python/def.hpp>
+#include <boost/python/to_python_value.hpp>
+#endif
 
 
 namespace ABSciex_HT {
-
+    
     Math::uBigI
     Math::factorial(Math::uBigI N) {
-        return factorial(N, 0);
+        return factorialp(N, 0);
     }
     
     Math::uBigI
-    Math::factorial(Math::uBigI N, unsigned long depth) {
-        uBigI tmp = ((N<2) ? 1 : factorial(N-1, ++depth)*N);
+    Math::factorialp(Math::uBigI N, unsigned long depth) {
+        uBigI tmp = ((N<2) ? 1 : factorialp(N-1, ++depth)*N);
         if (depth > 0 && std::numeric_limits<uBigI>::max()/tmp <= (N+1))
             throw FactorialException(N+1, "ABSciex_HT::Math::factorial");
         return tmp;
@@ -62,6 +69,14 @@ namespace ABSciex_HT {
 
     }
 
+    
+    Math::IDXVec
+    Math::pyIndexListFromCombinadic(uBigI cbx, uBigI N, uBigI K){
+        IDXVecPtr vecp = indexListFromCombinadic(cbx, N, K);
+        return IDXVec(vecp->begin(), vecp->end());
+    }
+    
+    
     Math::IDXVecPtr
     Math::indexListFromCombinadic(uBigI cbx, uBigI N, uBigI K){
         IDXVecPtr list = IDXVecPtr(new IDXVec(K));
@@ -73,7 +88,7 @@ namespace ABSciex_HT {
             idx = indexFromInteger(remainder, idx - 1, i);
             *pp = idx;
         }
-        return list;
+        return list; //std::move(list);
     }
     
     Math::uBigI
@@ -83,6 +98,13 @@ namespace ABSciex_HT {
         x -= comb;
         return n;
     }
+    
+    
+    Math::uBigI
+    Math::pyCombinadicFromIndexList(IDXVec &vec){
+        return combinadicFromIndexList(&vec);
+    }
+    
     
     Math::uBigI
     Math::combinadicFromIndexList(IDXVec *vecp){
@@ -117,3 +139,24 @@ namespace ABSciex_HT {
     }
     
 }
+
+#ifdef __BUILD_PYTHON__
+
+
+BOOST_PYTHON_MODULE(combinadic)
+{
+    //using namespace boost::python;
+    
+    boost::python::class_<ABSciex_HT::Math>("HtMath")
+    .def("choose", &ABSciex_HT::Math::choose)
+     .staticmethod("choose")
+    .def("factorial", &ABSciex_HT::Math::factorial)
+     .staticmethod("factorial")
+    .def("indexListFromCombinadic", &ABSciex_HT::Math::pyIndexListFromCombinadic)
+     .staticmethod("indexListFromCombinadic")
+    .def("combinadicFromIndexList", &ABSciex_HT::Math::pyCombinadicFromIndexList)
+     .staticmethod("combinadicFromIndexList") 
+    ;
+}
+
+#endif

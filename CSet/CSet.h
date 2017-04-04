@@ -15,14 +15,11 @@
 #include <sstream>
 #include <vector>
 #include <exception>
-#include "FactorialChoosePiOperators.h"
-
+//
 
 namespace ABSciex_HT {
     
-    class CSBType {
-        
-    };
+    //class CSBType { };
     
     // This class generates combinations up to 
     class CSetBinary{
@@ -40,7 +37,7 @@ namespace ABSciex_HT {
         CSBType n(void) const { return m_n; }
         CSBType k(void) const { return m_k; }
 
-        CSBType size(void) const { return Math::choose(m_n, m_k); }
+        CSBType size(void) const;
         CSBType last(void) const { return endCombination(); };
         bool operator==(const CSBType other) const { return m_combination == other; }
         bool operator==(const CSetBinary oth) const { return m_combination == oth.m_combination; }
@@ -51,7 +48,7 @@ namespace ABSciex_HT {
     private:
         
         
-        CSBType m_n, m_k, m_size;
+        CSBType m_n, m_k; //, m_size;
         CSBType m_combination, m_last;
         #define SHIFTMAX 32
         
@@ -84,6 +81,7 @@ namespace ABSciex_HT {
     std::ostream &operator<<(std::ostream &os, const CSetBinary &csb);
     
 }
+
 
 
 #endif /* defined(__CSet__CSet__) */

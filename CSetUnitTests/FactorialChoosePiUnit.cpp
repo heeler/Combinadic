@@ -68,6 +68,7 @@ TEST_F(MathCombinadicTest, ListFromIndex){
     using namespace ABSciex_HT;
     Math::IDXVecPtr listp = Math::indexListFromCombinadic( m_index, m_N, m_K);
     for (int i = 0; i < m_K; i++) {
+        std::cout << ">>  " << (int)(*listp)[i] << std::endl;
         EXPECT_TRUE( (*listp)[i] == (*m_ansp)[i] );
     }
 }

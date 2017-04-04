@@ -9,6 +9,7 @@
 #include <sstream>
 #include <algorithm>
 #include "CSet.h"
+#include "FactorialChoosePiOperators.h"
 
 
 namespace ABSciex_HT {
@@ -18,6 +19,11 @@ namespace ABSciex_HT {
         m_combination = firstCombination();
         m_last = endCombination(m_combination);
 
+    }
+    
+    CSetBinary::CSBType
+    CSetBinary::size(void) const {
+        return Math::choose(m_n, m_k);
     }
     
     bool CSetBinary::nextCombination(CSBType &x) // assume x has form x'01^a10^b in binary
