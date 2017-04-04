@@ -1,0 +1,25 @@
+# Copyright Stefan Seefeld 2016.
+# Distributed under the Boost Software License, Version 1.0.
+# (See accompanying file LICENSE_1_0.txt or copy at
+# http://www.boost.org/LICENSE_1_0.txt)
+
+import python ;
+import common ;
+
+project combinadic
+  : requirements
+    <location>.
+    ;
+
+lib python : : <name>"python2.7" <search>/usr/local/lib ; 
+lib boost_python : : <name>boost_python <search>/usr/local/lib ;
+lib boost_system : : <name>boost_system <search>/usr/local/lib ;
+lib cpp_lib : : <name>"c++" <search>/usr/lib ;
+
+python-extension combinadic 
+	: CSet/CSet.cpp CSet/FactorialChoosePiOperators.cpp python boost_python boost_system
+	: <include>"/usr/local/include"
+	  <include>"/usr/local/include/python2.7"
+	: <define>__BUILD_PYTHON__ ;
+
+make combinadic.so : combinadic : @common.copy ;
