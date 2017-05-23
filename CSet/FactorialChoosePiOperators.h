@@ -21,7 +21,8 @@ namespace ABSciex_HT {
         //typedef unsigned long uBigI;
         typedef unsigned long long int uBigI; //Big Int Type
         typedef long long int BigI;
-        typedef std::vector<uint_fast16_t> IDXVec;
+        //typedef std::vector<uint_fast16_t> IDXVec;
+        typedef std::vector<uBigI> IDXVec;
         typedef std::unique_ptr<IDXVec> IDXVecPtr;
         
         static IDXVec pyIndexListFromCombinadic(uBigI cbx, uBigI N, uBigI K);

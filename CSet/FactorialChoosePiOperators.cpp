@@ -108,6 +108,7 @@ namespace ABSciex_HT {
     
     Math::uBigI
     Math::combinadicFromIndexList(IDXVec *vecp){
+        std::sort(vecp->begin(), vecp->end());
         uBigI ans = 0;
         try {
             for (int i = 0; i < vecp->size(); i++)
